@@ -27,8 +27,7 @@ const sendEmail = async (to, subject, body) => {
             if (err) {
                 console.log(err);
                 reject(err)
-            }
-            else {
+            } else {
                 console.log(res);
                 resolve(res)
             }

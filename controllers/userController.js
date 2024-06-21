@@ -98,10 +98,10 @@ const verifyOTP = asyncHandler(async (req, res) => {
     }
 })
 
-const loginUser = asyncHandler(async (req,res)=> {
+const loginUser = asyncHandler(async (req, res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email});
-    if(user && (await user.matchPassword(password))) {
+    if (user && (await user.matchPassword(password))) {
         let token = generateToken(res, user._id);
         res.status(200).json({
             _id: user._id,
@@ -110,7 +110,7 @@ const loginUser = asyncHandler(async (req,res)=> {
             email: user.email,
             role: user.role,
             contactNo: user.contact,
-            gender:user.gender,
+            gender: user.gender,
             address: user.address,
             nicNo: user.nicNo,
             nicFront: user.nicFront,
@@ -122,5 +122,5 @@ const loginUser = asyncHandler(async (req,res)=> {
     }
 })
 
-export {registerUser, verifyOTP,loginUser}
+export {registerUser, verifyOTP, loginUser}
 
