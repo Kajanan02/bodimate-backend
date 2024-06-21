@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
+        default: "user",
         required: true
     },
     contactNo: {
@@ -45,6 +46,10 @@ const userSchema = new mongoose.Schema({
     },
 
     isVerified: {
+        type: Boolean,
+        default: false
+    },
+    isEmailVerified: {
         type: Boolean,
         default: false
     },
