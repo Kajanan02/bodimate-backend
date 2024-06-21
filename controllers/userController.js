@@ -98,5 +98,29 @@ const verifyOTP = asyncHandler(async (req, res) => {
     }
 })
 
-export {registerUser, verifyOTP}
+const loginUser = asyncHandler(async (req, res) => {
+    const {email, password} = req.body;
+    const user = await User.findOne({email});
+    if (user && (await user.matchPassword(password))) {
+        let token = generateToken(res, user._id);
+        res.status(200).json({
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role,
+            contactNo: user.contact,
+            gender: user.gender,
+            address: user.address,
+            nicNo: user.nicNo,
+            nicFront: user.nicFront,
+            nicBack: user.nicBack,
+            isVerified: user.isVerified,
+            isEmailVerified: user.isEmailVerified,
+            token: token
+        })
+    }
+})
+
+export {registerUser, verifyOTP, loginUser}
 
