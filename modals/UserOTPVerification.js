@@ -7,9 +7,17 @@ const UserOTPVerificationSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    email: {
+        type: String,
+        required: true
+    },
     otp: {
         type: String,
         required: true
+    },
+    isExpired: {
+        type: Boolean,
+        default: false
     },
     createdAt: {
         type: Date,

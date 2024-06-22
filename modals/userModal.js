@@ -44,7 +44,9 @@ const userSchema = new mongoose.Schema({
     nicBack: {
         type: String,
     },
-
+    profilePic: {
+        type: String,
+    },
     isVerified: {
         type: Boolean,
         default: false
