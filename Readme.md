@@ -12,6 +12,10 @@ npm run swagger
 
 Swagger documentation can be accessed at http://localhost:5002/api-docs
 
+### Authentication
+```
+Bearer Token
+```
 
 
 ## Environment Variables
