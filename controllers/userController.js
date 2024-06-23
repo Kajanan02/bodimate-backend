@@ -235,14 +235,15 @@ const resetPassword = asyncHandler(async (req, res) => {
 })
 
 const updateUser = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id);
+    const _id = req.params.id;
+    const user = await User.findById({_id});
     if (user) {
         user.firstName = req.body.firstName || user.firstName;
         user.lastName = req.body.lastName || user.lastName;
         user.email = req.body.email || user.email;
         user.role = req.body.role || user.role;
         user.contactNo = req.body.contactNo || user.contactNo;
-        user.gender = req.body || user.gender;
+        user.gender = req.body.gender || user.gender;
         user.address = req.body.address || user.address;
         user.nicNo = req.body.nicNo || user.nicNo;
         user.nicFront = req.body.nicFront || user.nicFront;
@@ -279,5 +280,5 @@ const updateUser = asyncHandler(async (req, res) => {
 })
 
 
-export {registerUser, verifyOTP, loginUser, logoutUser, forgotPassword, resetPassword}
+export {registerUser, verifyOTP, loginUser, logoutUser, forgotPassword, resetPassword,updateUser}
 
