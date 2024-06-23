@@ -5,6 +5,15 @@
 npm install
 ```
 
+For creating swagger documentation
+```
+npm run swagger
+```
+
+Swagger documentation can be accessed at http://localhost:5002/api-docs
+
+
+
 ## Environment Variables
 ```
 PORT=5000

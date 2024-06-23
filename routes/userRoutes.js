@@ -10,6 +10,8 @@ import {
 
 const router = express.Router();
 
+
+
 router.route('/register').post(registerUser);
 router.route('/verifyOTP').post(verifyOTP);
 router.route('/login').post(loginUser);
