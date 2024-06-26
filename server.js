@@ -7,7 +7,7 @@ import connectDB from './config/db.js';
 import {errorHandler, notFound} from "./middleware/errorMiddleware.js";
 import routes from "./routes/index.js";
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './swagger-output.json' assert { type: 'json' };;
+import swaggerDocument from './swagger-output.json' assert { type: 'json' };
 
 
 dotenv.config()
