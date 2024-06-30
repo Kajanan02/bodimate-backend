@@ -151,7 +151,7 @@ const verifyOTP = asyncHandler(async (req, res) => {
             return res.status(400).json({status: "FAILED", message: "Invalid OTP", data: {userId}});
         }
     } catch (error) {
-        res.status(500).json({status: "FAILED", message: "Server error", error: error.message});
+        res.status(400).json({status: "FAILED", message: "Server error", error: error.message});
     }
 });
 
@@ -159,6 +159,10 @@ const verifyOTP = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email});
+    console.log(user, "User")
+    console.log(password, "Password")
+    console.log(email, "email")
+    console.log(user?.matchPassword(password), "Match Password")
     if (user && (await user.matchPassword(password))) {
         let token = generateToken(res, user._id);
         res.status(200).json({
@@ -179,8 +183,10 @@ const loginUser = asyncHandler(async (req, res) => {
             token: token
         })
     } else {
-        res.status(401)
-        throw new Error("Invalid email or password")
+        const salt = await bcrypt.genSalt(10);
+        let password = await bcrypt.hash("123456", salt);
+        console.log("Password", password)
+        res.status(400).json({status: "FAILED", message: "Invalid email or password"});
     }
 })
 
