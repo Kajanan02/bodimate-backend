@@ -40,8 +40,8 @@ const createBoarding = asyncHandler(async (req, res) => {
     if (boarding) {
         res.status(201).json(boarding)
     } else {
-        res.status(400);
-        throw new Error("Invalid Data")
+        res.status(400).json({status: "FAILED", message: "Invalid Data"});
+
     }
 });
 const getOneBoarding = asyncHandler(async (req, res) => {
@@ -57,8 +57,8 @@ const getAllBoarding = asyncHandler(async (req, res) => {
     if (boarding) {
         res.json(boarding);
     } else {
-        res.status(404);
-        throw new Error('Boarding not found')
+        res.status(404).json({status: "FAILED", message: "Boarding not found"});
+
     }
 });
 
@@ -84,8 +84,8 @@ const editBoarding = asyncHandler(async (req, res) => {
         const updatedBoarding = await boarding.save();
         res.json(updatedBoarding);
     } else {
-        res.status(404);
-        throw new Error('Boarding not found')
+        res.status(404).json({status: "FAILED", message: "Boarding not found"});
+
     }
 })
 
@@ -95,8 +95,7 @@ const deleteBoarding = asyncHandler(async (req, res) => {
         await boarding.deleteOne();
         res.json({message: 'Boarding removed'});
     } else {
-        res.status(404);
-        throw new Error('Boarding not found')
+        res.status(404).json({status: "FAILED", message: "Boarding not found"});
     }
 })
 

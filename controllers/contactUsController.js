@@ -21,8 +21,8 @@ const sendMessage = asyncHandler(async (req, res) => {
     if (contactUs) {
         res.status(201).json(contactUs)
     } else {
-        res.status(400);
-        throw new Error("Invalid Data")
+        res.status(400).json({status: "FAILED", message: "Invalid Data"});
+
     }
 });
 
@@ -39,8 +39,8 @@ const getMessages = asyncHandler(async (req, res) => {
     if (contactUs) {
         res.json(contactUs);
     } else {
-        res.status(404);
-        throw new Error('Message not found')
+        res.status(404).json({status: "FAILED", message: "Message not found"});
+
     }
 });
 
