@@ -23,8 +23,7 @@ const registerUser = asyncHandler(async (req, res) => {
     } = req.body;
     const userExists = await User.findOne({email})
     if (userExists) {
-        res.status(400)
-        throw new Error("User already exists")
+        res.status(400).json({status: "FAILED", message: "User already exists"});
     }
 
     const user = await User.create({
@@ -53,8 +52,9 @@ const registerUser = asyncHandler(async (req, res) => {
             contactNo: user.contactNo
         })
     }).catch((error) => {
-        res.status(400);
-        throw new Error(error)
+        res.status(400).json({status: "FAILED", message: error});
+
+
     })
 })
 
@@ -206,8 +206,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
         sendOTP(user, res);
         res.status(200).json({message: "OTP sent successfully"})
     } else {
-        res.status(404)
-        throw new Error("User not found")
+        res.status(404).json({status: "FAILED", message: "User not found"});
     }
 })
 
@@ -231,12 +230,11 @@ const resetPassword = asyncHandler(async (req, res) => {
             await user.save();
             res.status(200).json({message: "Password reset successfully"})
         } else {
-            res.status(400)
-            throw new Error("Invalid OTP")
+            res.status(400).json({status: "FAILED", message: "Invalid OTP"});
+
         }
     } else {
-        res.status(400)
-        throw new Error("OTP not found")
+        res.status(400).json({status: "FAILED", message: "OTP not found"});
     }
 })
 
@@ -280,8 +278,8 @@ const updateUser = asyncHandler(async (req, res) => {
             isEmailVerified: updatedUser.isEmailVerified,
         })
     } else {
-        res.status(404)
-        throw new Error("User not found")
+        res.status(404).json({status: "FAILED", message: "User not found"});
+
     }
 })
 
