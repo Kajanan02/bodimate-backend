@@ -5,6 +5,8 @@ const createBoarding = asyncHandler(async (req, res) => {
     const {
         boardingName,
         boardingNo,
+        ownerName,
+        ownerNIC,
         street,
         city,
         district,
@@ -23,6 +25,8 @@ const createBoarding = asyncHandler(async (req, res) => {
     const boarding = await Boarding.create({
         boardingName,
         boardingNo,
+        ownerName,
+        ownerNIC,
         street,
         city,
         district,
@@ -68,6 +72,8 @@ const editBoarding = asyncHandler(async (req, res) => {
     if (boarding) {
         boarding.boardingName = req.body.boardingName || boarding.boardingName;
         boarding.boardingNo = req.body.boardingNo || boarding.boardingNo;
+        boarding.ownerName = req.body.ownerName || boarding.ownerName;
+        boarding.ownerNIC = req.body.ownerNIC || boarding.ownerNIC;
         boarding.street = req.body.street || boarding.street;
         boarding.city = req.body.city || boarding.city;
         boarding.district = req.body.district || boarding.district;

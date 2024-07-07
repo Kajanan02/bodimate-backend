@@ -17,7 +17,7 @@ const boardingSchema = new mongoose.Schema({
     },
     street: {
         type:String,
-        required: true
+        required: true,
     },
     city: {
         type:String,
@@ -25,19 +25,60 @@ const boardingSchema = new mongoose.Schema({
     },
     district: {
         type:String,
-        required: true
+        required: true,
+        enum: ["Ampara",
+            "Anuradhapura",
+            "Badulla",
+            "Batticaloa",
+            "Colombo",
+            "Galle",
+            "Gampaha",
+            "Hambantota",
+            "Jaffna",
+            "Kalutara",
+            "Kandy",
+            "Kegalle",
+            "Kilinochchi",
+            "Kurunegala",
+            "Mannar",
+            "Matale",
+            "Matara",
+            "Monaragala",
+            "Mullativu",
+            "Nuwara Eliya",
+            "Polonnaruwa",
+            "Puttalam",
+            "Ratnapura",
+            "Trincomalee",
+            "Vavuniya"]
     },
     province: {
         type:String,
-        required: true
+        required: true,
+        enum: [
+            "Central Province",
+            "Eastern Province",
+            "Northern Province",
+            "North Central Province",
+            "North Western Province",
+            "Sabaragamuwa Province",
+            "Southern Province",
+            "Uva Province",
+            "Western Province"]
     },
     boardingType: {
         type: String,
-        required: true
+        required: true,
     },
     stayPreference: {
         type: String,
-        required: true
+        required: true,
+        enum: [
+            'on',
+            // 'Male Only',
+            // 'Female Only',
+            // 'No Gender Restriction'
+        ]
     },
     facilities: {
         type: [String],
@@ -61,7 +102,24 @@ const boardingSchema = new mongoose.Schema({
     },
     nearestUniversity: {
         type: String,
-        required: true
+        required: true,
+        enum:[
+            "Eastern University, Sri Lanka (EUSL)",
+            "Open University of Sri Lanka, The (OUSL)",
+            "Rajarata University of Sri Lanka (RUSL)",
+            "Sabaragamuwa University of Sri Lanka (SUSL)",
+            "South Eastern University of Sri Lanka (SEUSL)",
+            "University of Colombo (CBO)",
+            "University of Jaffna (UJA)",
+            "University of Kelaniya (KLN)",
+            "University of Moratuwa (MRT)",
+            "University of Peradeniya (PDN)",
+            "University of Ruhuna (RUH)",
+            "University of Sri Jayewardenepura (SJP)",
+            "University of the Visual and Performing Arts (UVPA)",
+            "Uva Wellassa University of Sri Lanka (UWU)",
+            "Wayamba University of Sri Lanka (WUSL)"
+        ]
     },
     advancedPayment: {
         type: String,
