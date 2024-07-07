@@ -73,12 +73,6 @@ const boardingSchema = new mongoose.Schema({
     stayPreference: {
         type: String,
         required: true,
-        enum: [
-            'on',
-            // 'Male Only',
-            // 'Female Only',
-            // 'No Gender Restriction'
-        ]
     },
     facilities: {
         type: [String],
