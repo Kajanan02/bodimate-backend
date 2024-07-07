@@ -69,22 +69,10 @@ const boardingSchema = new mongoose.Schema({
     boardingType: {
         type: String,
         required: true,
-        enum:[
-            'on'
-            // 'An Entire Home',
-            // 'A Room',
-            // 'A Shared Room'
-        ]
     },
     stayPreference: {
         type: String,
         required: true,
-        enum: [
-            'on',
-            // 'Male Only',
-            // 'Female Only',
-            // 'No Gender Restriction'
-        ]
     },
     facilities: {
         type: [String],
