@@ -41,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
         isVerified,
         profilePic
     }).then((user) => {
-        sendOTP(user, res)
+        //sendOTP(user, res)
 
         res.status(201).json({
             _id: user._id,
