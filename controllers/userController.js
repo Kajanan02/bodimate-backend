@@ -23,8 +23,7 @@ const registerUser = asyncHandler(async (req, res) => {
     } = req.body;
     const userExists = await User.findOne({email})
     if (userExists) {
-        res.status(400)
-        throw new Error("User already exists")
+        res.status(400).json({status: "FAILED", message: "User already exists"});
     }
 
     const user = await User.create({
@@ -42,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
         isVerified,
         profilePic
     }).then((user) => {
-        sendOTP(user, res)
+        //sendOTP(user, res)
 
         res.status(201).json({
             _id: user._id,
@@ -53,8 +52,9 @@ const registerUser = asyncHandler(async (req, res) => {
             contactNo: user.contactNo
         })
     }).catch((error) => {
-        res.status(400);
-        throw new Error(error)
+        res.status(400).json({status: "FAILED", message: error});
+
+
     })
 })
 
@@ -151,7 +151,7 @@ const verifyOTP = asyncHandler(async (req, res) => {
             return res.status(400).json({status: "FAILED", message: "Invalid OTP", data: {userId}});
         }
     } catch (error) {
-        res.status(500).json({status: "FAILED", message: "Server error", error: error.message});
+        res.status(400).json({status: "FAILED", message: "Server error", error: error.message});
     }
 });
 
@@ -159,6 +159,10 @@ const verifyOTP = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email});
+    console.log(user, "User")
+    console.log(password, "Password")
+    console.log(email, "email")
+    console.log(user?.matchPassword(password), "Match Password")
     if (user && (await user.matchPassword(password))) {
         let token = generateToken(res, user._id);
         res.status(200).json({
@@ -179,8 +183,10 @@ const loginUser = asyncHandler(async (req, res) => {
             token: token
         })
     } else {
-        res.status(401)
-        throw new Error("Invalid email or password")
+        const salt = await bcrypt.genSalt(10);
+        let password = await bcrypt.hash("123456", salt);
+        console.log("Password", password)
+        res.status(400).json({status: "FAILED", message: "Invalid email or password"});
     }
 })
 
@@ -200,8 +206,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
         sendOTP(user, res);
         res.status(200).json({message: "OTP sent successfully"})
     } else {
-        res.status(404)
-        throw new Error("User not found")
+        res.status(404).json({status: "FAILED", message: "User not found"});
     }
 })
 
@@ -225,12 +230,11 @@ const resetPassword = asyncHandler(async (req, res) => {
             await user.save();
             res.status(200).json({message: "Password reset successfully"})
         } else {
-            res.status(400)
-            throw new Error("Invalid OTP")
+            res.status(400).json({status: "FAILED", message: "Invalid OTP"});
+
         }
     } else {
-        res.status(400)
-        throw new Error("OTP not found")
+        res.status(400).json({status: "FAILED", message: "OTP not found"});
     }
 })
 
@@ -274,8 +278,8 @@ const updateUser = asyncHandler(async (req, res) => {
             isEmailVerified: updatedUser.isEmailVerified,
         })
     } else {
-        res.status(404)
-        throw new Error("User not found")
+        res.status(404).json({status: "FAILED", message: "User not found"});
+
     }
 })
 

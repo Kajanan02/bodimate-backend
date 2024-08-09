@@ -1,14 +1,12 @@
 # Bodimate Backend
 
 ## Project setup
-```
-npm install
-```
+
+### `npm install`
 
 For creating swagger documentation
-```
-npm run swagger
-```
+
+### `npm run swagger`
 
 Swagger documentation can be accessed at http://localhost:5002/api-docs
 
@@ -28,12 +26,11 @@ EMAIL_PASS
 
 
 ### Compiles and hot-reloads for development
-```
-npm run server
-```
+
+### `npm run dev`
+
 
 ### Compiles and minifies for production
-```
-npm start
-```
+
+### `npm run start`
 
