@@ -1,0 +1,49 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - dev  # Or 'master' or any other branch you use
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'  # Or the version your application uses
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run tests (optional)
+      - name: Run tests
+        run: npm test
+
+      # Build the application
+      - name: Build application
+        run: npm run build  # Adjust if your build script is different
+
+      # Zip the application for deployment
+      - name: Archive files
+        run: zip -r my_app.zip . -x '*.git*' 'node_modules/*' 'test/*' '*.yml' '*.md'
+
+      # Deploy to AWS Elastic Beanstalk
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: 'us-east-1'  # Replace with your AWS region
+          application_name: 'bodimate-node'  # Replace with your Elastic Beanstalk application name
+          environment_name: 'Bodimate-node-env'  # Replace with your Elastic Beanstalk environment name
+          version_label: '${{ github.run_number }}-${{ github.sha }}'
+          deployment_package: 'my_app.zip'
