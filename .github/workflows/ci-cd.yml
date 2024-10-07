@@ -36,5 +36,6 @@ jobs:
           region: 'us-east-1'  # Your AWS region
           application_name: 'bodimate-node'  # Your Elastic Beanstalk application name
           environment_name: 'Bodimate-node-env'  # Your Elastic Beanstalk environment name
-          version_label: ${{ github.sha }}
+          version_label: ${{ github.sha }}-${{ github.run_id }}
           deployment_package: deploy-package.zip
+          use_existing_version_if_available: true
