@@ -20,10 +20,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # If you have a build step, uncomment the following lines
-      # - name: Build project
-      #   run: npm run build
-
       - name: Archive project files
         run: |
           zip -r deploy-package.zip . -x '*.git*' 'node_modules/*' '*.github*'
@@ -33,9 +29,9 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          region: 'us-east-1'  # Your AWS region
-          application_name: 'backend-bodimate'  # Your Elastic Beanstalk application name
-          environment_name: 'Backend-bodimate-env'  # Your Elastic Beanstalk environment name
+          region: 'ap-south-1'
+          application_name: 'backend-bodimate'
+          environment_name: 'Backend-bodimate-env'
           version_label: ${{ github.sha }}-${{ github.run_id }}
           deployment_package: deploy-package.zip
           use_existing_version_if_available: true
