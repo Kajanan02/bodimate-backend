@@ -11,6 +11,7 @@ const registerUser = asyncHandler(async (req, res) => {
         lastName,
         email,
         password,
+        username,
         role,
         contactNo,
         gender,
@@ -33,6 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
         password,
         role,
         contactNo,
+        username,
         gender,
         address,
         nicNo,
@@ -47,6 +49,7 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
+            username: user.username,
             email: user.email,
             role: user.role,
             contactNo: user.contactNo
@@ -167,6 +170,7 @@ const loginUser = asyncHandler(async (req, res) => {
         let token = generateToken(res, user._id);
         res.status(200).json({
             _id: user._id,
+            username: user.username,
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
