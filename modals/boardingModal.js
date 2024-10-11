@@ -68,11 +68,11 @@ const boardingSchema = new mongoose.Schema({
     },
     boardingType: {
         type: String,
-        required: true,
+        // required: true,
     },
     stayPreference: {
         type: String,
-        required: true,
+        // required: true,
     },
     facilities: {
         type: [String],
