@@ -20,6 +20,7 @@ const createBoarding = asyncHandler(async (req, res) => {
         distance,
         boardingOwner,
         nearestUniversity,
+        isVerified,
         advancedPayment
     } = req.body;
 
@@ -33,6 +34,7 @@ const createBoarding = asyncHandler(async (req, res) => {
         district,
         province,
         boardingType,
+        isVerified,
         stayPreference,
         facilities,
         membersCount,
@@ -79,6 +81,7 @@ const editBoarding = asyncHandler(async (req, res) => {
         boarding.street = req.body.street || boarding.street;
         boarding.city = req.body.city || boarding.city;
         boarding.district = req.body.district || boarding.district;
+        boarding.isVerified = req.body.isVerified || boarding.isVerified;
         boarding.province = req.body.province || boarding.province;
         boarding.boardingType = req.body.boardingType || boarding.boardingType;
         boarding.stayPreference = req.body.stayPreference || boarding.stayPreference;
