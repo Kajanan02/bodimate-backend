@@ -5,9 +5,13 @@ const boardingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    boardingOwner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     boardingNo: {
         type: Number,
-        required: true
     },
     ownerName: {
         type: String,
@@ -16,15 +20,15 @@ const boardingSchema = new mongoose.Schema({
         type: String,
     },
     street: {
-        type:String,
+        type: String,
         required: true,
     },
     city: {
-        type:String,
+        type: String,
         required: true
     },
     district: {
-        type:String,
+        type: String,
         required: true,
         enum: ["Ampara",
             "Anuradhapura",
@@ -53,7 +57,7 @@ const boardingSchema = new mongoose.Schema({
             "Vavuniya"]
     },
     province: {
-        type:String,
+        type: String,
         required: true,
         enum: [
             "Central Province",
@@ -90,6 +94,9 @@ const boardingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    location: {
+        type: Object
+    },
     distance: {
         type: String,
         required: true
@@ -97,7 +104,7 @@ const boardingSchema = new mongoose.Schema({
     nearestUniversity: {
         type: String,
         required: true,
-        enum:[
+        enum: [
             "Eastern University, Sri Lanka (EUSL)",
             "Open University of Sri Lanka, The (OUSL)",
             "Rajarata University of Sri Lanka (RUSL)",
@@ -121,6 +128,10 @@ const boardingSchema = new mongoose.Schema({
     },
     boardingPic: {
         type: [String]
+    },
+    isVerified: {
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true

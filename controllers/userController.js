@@ -46,15 +46,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }).then((user) => {
         //sendOTP(user, res)
 
-        res.status(201).json({
-            _id: user._id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            username: user.username,
-            email: user.email,
-            role: user.role,
-            contactNo: user.contactNo
-        })
+        res.status(201).json(user)
     }).catch((error) => {
         res.status(400).json({status: "FAILED", message: error});
 
@@ -176,7 +168,7 @@ const loginUser = asyncHandler(async (req, res) => {
             lastName: user.lastName,
             email: user.email,
             role: user.role,
-            contactNo: user.contact,
+            contactNo: user.contactNo,
             gender: user.gender,
             address: user.address,
             nicNo: user.nicNo,
