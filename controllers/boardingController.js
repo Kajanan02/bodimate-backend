@@ -18,6 +18,7 @@ const createBoarding = asyncHandler(async (req, res) => {
         noOfRooms,
         pricePerMonth,
         distance,
+        boardingOwner,
         nearestUniversity,
         advancedPayment
     } = req.body;
@@ -36,6 +37,7 @@ const createBoarding = asyncHandler(async (req, res) => {
         facilities,
         membersCount,
         noOfRooms,
+        boardingOwner,
         pricePerMonth,
         distance,
         nearestUniversity,
