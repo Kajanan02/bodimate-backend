@@ -2,16 +2,17 @@ import asyncHandler from "express-async-handler";
 import Chat from "../modals/chatModal.js";
 
 const createChat = asyncHandler(async (req, res) => {
-    const {name, userId, message,userType} = req.body;
+    const {name, senderId,receiverId, message,userType} = req.body;
 
-    if (!name || !userId || !message) {
+    if (!name || !senderId || !message) {
         res.status(400);
         throw new Error('All fields are required');
     }
 
     const newChat = new Chat({
         name,
-        userId,
+        senderId,
+        receiverId,
         message,
         userType
     });

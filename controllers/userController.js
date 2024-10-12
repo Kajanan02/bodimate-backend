@@ -279,6 +279,15 @@ const updateUser = asyncHandler(async (req, res) => {
     }
 })
 
+const getAllUsers = asyncHandler(async (req, res) => {
+    const users = await User.find({ _id: { $ne: "6706daa45592c323718263b7" } });
+    if(users){
+        res.status(200).json(users);
+    } else {
+        res.status(400).json({status: "FAILED", message: "No users found"});
+    }
+})
 
-export {registerUser, verifyOTP, loginUser, logoutUser, forgotPassword, resetPassword,updateUser}
+
+export {registerUser, verifyOTP, loginUser, logoutUser, forgotPassword, resetPassword,updateUser,getAllUsers}
 
