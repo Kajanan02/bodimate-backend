@@ -4,6 +4,7 @@ import generateToken from "../utils/generateToken.js";
 import bcrypt from "bcryptjs";
 import UserOTPVerification from "../modals/UserOTPVerification.js";
 import sendEmail from "../utils/email-service/email.js";
+import Boarding from "../modals/boardingModal.js";
 
 const registerUser = asyncHandler(async (req, res) => {
     const {
@@ -241,6 +242,14 @@ const resetPassword = asyncHandler(async (req, res) => {
         res.status(400).json({status: "FAILED", message: "OTP not found"});
     }
 })
+const getBoardingOwners = asyncHandler(async (req, res) => {
+    const users = await User.find({role: 'boarding owner'});
+    res.status(200).json(users);
+});
+const getStudents = asyncHandler(async (req, res) => {
+    const users = await User.find({role: 'student'});
+    res.status(200).json(users);
+});
 
 const updateUser = asyncHandler(async (req, res) => {
     const _id = req.params.id;
@@ -285,8 +294,19 @@ const updateUser = asyncHandler(async (req, res) => {
         res.status(404).json({status: "FAILED", message: "User not found"});
 
     }
+});
+
+const deleteUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+        await user.deleteOne();
+        res.json({message: 'User removed'});
+    } else {
+        res.status(404).json({status: "FAILED", message: "User is not found"});
+    }
 })
 
 
-export {registerUser, verifyOTP, loginUser, logoutUser, forgotPassword, resetPassword,updateUser}
+
+export {registerUser, verifyOTP, loginUser, logoutUser, forgotPassword, resetPassword,updateUser,getBoardingOwners,getStudents,deleteUser}
 

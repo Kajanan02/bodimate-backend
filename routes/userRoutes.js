@@ -1,6 +1,7 @@
 import express from 'express';
 import {
-    forgotPassword,
+    deleteUser,
+    forgotPassword, getBoardingOwners, getStudents,
     loginUser,
     logoutUser,
     registerUser,
@@ -8,6 +9,7 @@ import {
     verifyOTP
 } from '../controllers/userController.js';
 import {protect} from "../middleware/authMiddleware.js";
+import {get} from "mongoose";
 
 const router = express.Router();
 
@@ -20,6 +22,9 @@ router.route('/logout').get(logoutUser);
 router.route('/forgotPassword').post(forgotPassword);
 router.route('/resetPassword').post(resetPassword);
 router.put('/update/:id', protect, updateUser);
+router.route('/getBoardingOwners').get(getBoardingOwners)
+router.route('/getStudents').get(getStudents);
+router.route('/deleteUser/:id').delete(deleteUser);
 
 
 export default router;
