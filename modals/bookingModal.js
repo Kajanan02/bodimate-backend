@@ -3,19 +3,31 @@ import mongoose from "mongoose";
 const bookingSchema = new mongoose.Schema({
     studentName : {
         type : String,
-        required: true
     },
     boardingId : {
         type : mongoose.Schema.Types.ObjectId,
+        ref :"Boarding",
+        required: true
+    },
+    ownerId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        required: true
+    },
+    studentId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"User",
         required: true
     },
     ownerName: {
         type: String,
-        required: true
     },
     boardingName: {
         type : String,
-        required: true
+    },
+    amount:{
+      type: Number,
+      required: true
     },
     checkInDate : {
         type: Date,
@@ -31,7 +43,6 @@ const bookingSchema = new mongoose.Schema({
     },
     pricePerMonth: {
         type: String,
-        required: true
     },
 }, {
     timestamps: true
