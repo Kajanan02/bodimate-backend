@@ -86,6 +86,9 @@ const editBoarding = asyncHandler(async (req, res) => {
         boarding.boardingType = req.body.boardingType || boarding.boardingType;
         boarding.stayPreference = req.body.stayPreference || boarding.stayPreference;
         boarding.membersCount = req.body.membersCount || boarding.membersCount;
+        boarding.facilities = req.body.facilities || boarding.facilities;
+        boarding.location = req.body.location || boarding.location;
+        boarding.isVerified = req.body.isVerified || boarding.isVerified;
         boarding.noOfRooms = req.body.noOfRooms || boarding.noOfRooms;
         boarding.pricePerMonth = req.body.pricePerMonth || boarding.pricePerMonth;
         boarding.distance = req.body.distance || boarding.distance;
