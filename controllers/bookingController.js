@@ -1,7 +1,5 @@
 import asyncHandler from "express-async-handler";
 import Booking from "../modals/bookingModal.js";
-import res from "express/lib/response.js";
-import e from "express";
 
 const createBooking = asyncHandler(async (req, res) => {
     const {
@@ -9,10 +7,13 @@ const createBooking = asyncHandler(async (req, res) => {
         boardingId,
         ownerName,
         boardingName,
+        ownerId,
+        studentId,
         checkInDate,
         checkOutDate,
         memberCount,
         pricePerMonth,
+        amount
     } = req.body;
 
     const booking = await Booking.create({
@@ -20,10 +21,12 @@ const createBooking = asyncHandler(async (req, res) => {
         boardingId,
         ownerName,
         boardingName,
+        ownerId,
+        studentId,
         checkInDate,
         checkOutDate,
         memberCount,
-        pricePerMonth,})
+        pricePerMonth,amount})
 
     if (booking) {
         res.status(201).json(booking)
@@ -33,7 +36,7 @@ const createBooking = asyncHandler(async (req, res) => {
 });
 
 const deleteBooking = asyncHandler(async (req,res) => {
-    const booking = await Booking.findById(req.params.id);
+    const booking = await Booking.findById(req.params.id)
     if(booking){
         await booking.deleteOne();
         res.json({message: 'Booking Removed'});
@@ -43,7 +46,12 @@ const deleteBooking = asyncHandler(async (req,res) => {
 })
 
 const getAllBookings = asyncHandler(async (req, res) => {
-    const booking = await Booking.find({}).sort({createdAt: -1});
+    const booking = await Booking.find({}).find({})
+        .populate('boardingId')
+        .populate('ownerId', 'lastName email')
+        .populate('studentId', 'lastName age')
+        .sort({ createdAt: -1 });
+
     if (booking){
         res.json(booking);
     } else {
@@ -51,7 +59,18 @@ const getAllBookings = asyncHandler(async (req, res) => {
     }
 });
 
+const getOneBooking = asyncHandler(async (req,res)=> {
+    const booking = await Booking.findById(req.params.id)
+        .populate('boardingId')
+        .populate('ownerId', 'lastName email')
+        .populate('studentId', 'lastName age')
+    if(booking){
+        res.json(booking);
+    } else {
+        res.status(404).json({status: "FAILED", message: "Booking is not found"})
+    }
+})
 
 
 
-export {createBooking, getAllBookings, deleteBooking};
+export {createBooking, getAllBookings, deleteBooking,getOneBooking};

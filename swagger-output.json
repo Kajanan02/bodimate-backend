@@ -166,6 +166,19 @@
         }
       }
     },
+    "/api/users/getAllUsers": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/api/users/forgotPassword": {
       "post": {
         "description": "",
@@ -356,7 +369,13 @@
                 "distance": {
                   "example": "any"
                 },
+                "boardingOwner": {
+                  "example": "any"
+                },
                 "nearestUniversity": {
+                  "example": "any"
+                },
+                "isVerified": {
                   "example": "any"
                 },
                 "advancedPayment": {
@@ -442,6 +461,9 @@
                 "district": {
                   "example": "any"
                 },
+                "isVerified": {
+                  "example": "any"
+                },
                 "province": {
                   "example": "any"
                 },
@@ -452,6 +474,12 @@
                   "example": "any"
                 },
                 "membersCount": {
+                  "example": "any"
+                },
+                "facilities": {
+                  "example": "any"
+                },
+                "location": {
                   "example": "any"
                 },
                 "noOfRooms": {
@@ -520,6 +548,9 @@
                 "district": {
                   "example": "any"
                 },
+                "isVerified": {
+                  "example": "any"
+                },
                 "province": {
                   "example": "any"
                 },
@@ -530,6 +561,12 @@
                   "example": "any"
                 },
                 "membersCount": {
+                  "example": "any"
+                },
+                "facilities": {
+                  "example": "any"
+                },
+                "location": {
                   "example": "any"
                 },
                 "noOfRooms": {
@@ -676,7 +713,10 @@
                 "name": {
                   "example": "any"
                 },
-                "userId": {
+                "senderId": {
+                  "example": "any"
+                },
+                "receiverId": {
                   "example": "any"
                 },
                 "message": {
@@ -698,6 +738,163 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/booking/createBooking": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "studentName": {
+                  "example": "any"
+                },
+                "boardingId": {
+                  "example": "any"
+                },
+                "ownerName": {
+                  "example": "any"
+                },
+                "boardingName": {
+                  "example": "any"
+                },
+                "ownerId": {
+                  "example": "any"
+                },
+                "studentId": {
+                  "example": "any"
+                },
+                "checkInDate": {
+                  "example": "any"
+                },
+                "checkOutDate": {
+                  "example": "any"
+                },
+                "memberCount": {
+                  "example": "any"
+                },
+                "pricePerMonth": {
+                  "example": "any"
+                },
+                "amount": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/booking/getAllBookings": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/booking/deleteBooking/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/booking/getOneBoarding/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/payment/payment-hash": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "example": "any"
+                },
+                "boardingId": {
+                  "example": "any"
+                },
+                "ownerId": {
+                  "example": "any"
+                },
+                "studentId": {
+                  "example": "any"
+                },
+                "checkInDate": {
+                  "example": "any"
+                },
+                "checkOutDate": {
+                  "example": "any"
+                },
+                "memberCount": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }

@@ -132,6 +132,16 @@ const boardingSchema = new mongoose.Schema({
     isVerified: {
         type: Boolean,
         default: false
+    },
+    availableSlots: {
+        type: Number,
+        default: function () {
+            return this.membersCount;
+        }
+    },
+    available:{
+        type:Boolean,
+        default: true
     }
 }, {
     timestamps: true
