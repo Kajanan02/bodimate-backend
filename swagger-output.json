@@ -898,6 +898,16 @@
           }
         }
       }
+    },
+    "/api/admin/admin-dashboard": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }
