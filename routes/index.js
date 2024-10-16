@@ -5,6 +5,7 @@ import contactUsRoutes from "./contactUsRoutes.js";
 import chatRoutes from "./chatRoutes.js";
 import bookingRoutes from "./bookingRoutes.js";
 import paymentRoutes from "./paymentRoutes.js";
+import adminRoutes from "./adminRoutes.js";
 
 const router = express.Router();
 
@@ -18,4 +19,5 @@ router.use("/api/contactUs", contactUsRoutes);
 router.use("/api/chat", chatRoutes);
 router.use("/api/booking", bookingRoutes);
 router.use("/api/payment", paymentRoutes);
+router.use("/api/admin", adminRoutes);
 export default router;
