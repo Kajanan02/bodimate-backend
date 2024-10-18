@@ -13,6 +13,7 @@ const createBoarding = asyncHandler(async (req, res) => {
         province,
         boardingType,
         stayPreference,
+        boardingPic,
         facilities,
         membersCount,
         noOfRooms,
@@ -35,6 +36,7 @@ const createBoarding = asyncHandler(async (req, res) => {
         province,
         boardingType,
         isVerified,
+        boardingPic,
         stayPreference,
         facilities,
         membersCount,
@@ -84,6 +86,7 @@ const editBoarding = asyncHandler(async (req, res) => {
         boarding.isVerified = req.body.isVerified || boarding.isVerified;
         boarding.province = req.body.province || boarding.province;
         boarding.boardingType = req.body.boardingType || boarding.boardingType;
+        boarding.boardingPic = req.body.boardingPic || boarding.boardingPic;
         boarding.stayPreference = req.body.stayPreference || boarding.stayPreference;
         boarding.membersCount = req.body.membersCount || boarding.membersCount;
         boarding.facilities = req.body.facilities || boarding.facilities;

@@ -99,7 +99,6 @@ const boardingSchema = new mongoose.Schema({
     },
     distance: {
         type: String,
-        required: true
     },
     nearestUniversity: {
         type: String,
