@@ -31,6 +31,18 @@ const getOneUniversity = asyncHandler(async (req, res) => {
     }
 });
 
+const getOneUniversityByName = asyncHandler(async (req, res) => {
+    let universityName = req.params.universityName
+    const university = await University.findOne({universityName: universityName})
+    if (university) {
+        res.json(university)
+    }else {
+        res.status(404).json({status: "FAILED", message: "University not found"});
+    }
+});
+
+
+
 const getAllUniversity = asyncHandler(async (req, res) => {
     const university = await University.find({}).sort({ createdAt: -1 });
     if (university) {
@@ -69,4 +81,4 @@ const deleteUniversity = asyncHandler(async (req, res) => {
     }
 })
 
-export {createUniversity, getOneUniversity, getAllUniversity,editUniversity ,deleteUniversity };
+export {createUniversity, getOneUniversity, getAllUniversity,editUniversity ,deleteUniversity ,getOneUniversityByName};
