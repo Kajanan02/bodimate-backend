@@ -4,6 +4,7 @@ import generateToken from "../utils/generateToken.js";
 import bcrypt from "bcryptjs";
 import UserOTPVerification from "../modals/UserOTPVerification.js";
 import sendEmail from "../utils/email-service/email.js";
+import Boarding from "../modals/boardingModal.js";
 
 const registerUser = asyncHandler(async (req, res) => {
     const {
@@ -288,6 +289,65 @@ const getAllUsers = asyncHandler(async (req, res) => {
     }
 })
 
+// const getBoardingOwners = asyncHandler(async (req, res) => {
+//     const boardingOwners = await User.find({ role: 'boarding owner' });  // Filter by role
+//     res.status(200).json(boardingOwners);
+// });
+const getBoardingOwners = asyncHandler(async (req, res) => {
+    try {
+        // Find users whose role is 'boarding owner'
+        const boardingOwners = await User.find({ role: 'boardingOwner' }).sort({ createdAt: -1 });
 
-export {registerUser, verifyOTP, loginUser, logoutUser, forgotPassword, resetPassword,updateUser,getAllUsers}
+        if (boardingOwners && boardingOwners.length > 0) {
+            res.json(boardingOwners);
+        } else {
+            res.status(404).json({ status: "FAILED", message: "Boarding Owner not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ status: "FAILED", message: "Server error", error: error.message });
+    }
+});
+
+// const getStudents = asyncHandler(async (req, res) => {
+//     try {
+//         // Find users whose role is 'boarding owner'
+//         const students = await User.find({ role: 'student' }).sort({ createdAt: -1 });
+//
+//         if (students && students.length > 0) {
+//             res.json(students);
+//         } else {
+//             res.status(404).json({ status: "FAILED", message: "Student not found" });
+//         }
+//     } catch (error) {
+//         res.status(500).json({ status: "FAILED", message: "Server error", error: error.message });
+//     }
+// });
+
+const getStudents = asyncHandler(async (req, res) => {
+    try {
+        // Find users whose role is either 'student' or 'user'
+        const students = await User.find({ role: { $in: ['student', 'user'] } }).sort({ createdAt: -1 });
+
+        if (students && students.length > 0) {
+            res.json(students);
+        } else {
+            res.status(404).json({ status: "FAILED", message: "Student or User not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ status: "FAILED", message: "Server error", error: error.message });
+    }
+});
+
+const deleteUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+        await user.deleteOne();
+        res.json({message: 'User removed'});
+    } else {
+        res.status(404).json({status: "FAILED", message: "User not found"});
+    }
+})
+
+
+export {registerUser, verifyOTP, loginUser, logoutUser, forgotPassword, resetPassword,updateUser,getAllUsers, getBoardingOwners,getStudents, deleteUser}
 
