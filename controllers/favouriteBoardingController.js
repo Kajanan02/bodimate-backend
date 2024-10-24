@@ -1,14 +1,15 @@
 import asyncHandler from "express-async-handler";
+import Favourite from "../modals/favuriteBoardingModal.js";
 
 const createFavouriteBoarding = asyncHandler(async (req, res) => {
 
     const {
-        studentId,
+        userId,
         boardingId
     } = req.body;
 
-    const favouriteBoarding = await FavouriteBoarding.create({
-        studentId,
+    const favouriteBoarding = await Favourite.create({
+        userId,
         boardingId
     })
 
@@ -20,7 +21,7 @@ const createFavouriteBoarding = asyncHandler(async (req, res) => {
 })
 
 const deleteFavouriteBoarding = asyncHandler(async (req,res) => {
-    const favouriteBoarding = await FavouriteBoarding.findById(req.params.id)
+    const favouriteBoarding = await Favourite.findById(req.params.id)
     if(favouriteBoarding){
         await favouriteBoarding.deleteOne();
         res.json({message: 'Favourite Boarding Removed'});
@@ -31,9 +32,7 @@ const deleteFavouriteBoarding = asyncHandler(async (req,res) => {
 
 
 const getFavouriteBoardings = asyncHandler(async (req, res) => {
-    const favouriteBoarding = await FavouriteBoarding.find({}).find({})
-        .populate('boardingId')
-        .populate('studentId')
+    const favouriteBoarding = await Favourite.find({}).find({})
         .sort({ createdAt: -1 });
 
     if (favouriteBoarding){
