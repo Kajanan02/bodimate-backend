@@ -14,3 +14,6 @@ const  favouriteBoardingSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
+
+const Favourite = mongoose.model('favourite', favouriteBoardingSchema);
+export default Favourite;
