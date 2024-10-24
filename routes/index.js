@@ -22,4 +22,5 @@ router.use("/api/booking", bookingRoutes);
 router.use("/api/payment", paymentRoutes);
 router.use("/api/admin", adminRoutes);
 router.use("/api/university", universityRoutes);
+router.use("/api/favourite", universityRoutes);
 export default router;
