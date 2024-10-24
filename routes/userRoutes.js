@@ -1,6 +1,7 @@
 import express from 'express';
 import {
-    forgotPassword, getAllUsers,
+    deleteUser,
+    forgotPassword, getAllUsers, getBoardingOwners, getStudents,
     loginUser,
     logoutUser,
     registerUser,
@@ -21,6 +22,9 @@ router.route('/getAllUsers').get(getAllUsers);
 router.route('/forgotPassword').post(forgotPassword);
 router.route('/resetPassword').post(resetPassword);
 router.put('/update/:id', protect, updateUser);
+router.route('/getBoardingOwners').get(getBoardingOwners);
+router.route('/getStudents').get(getStudents);
+router.route('/deleteUser/:id').delete(deleteUser)
 
 
 export default router;
