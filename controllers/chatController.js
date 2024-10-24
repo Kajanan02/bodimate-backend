@@ -10,7 +10,6 @@ const createChat = asyncHandler(async (req, res) => {
     }
 
     const newChat = new Chat({
-        name,
         senderId,
         receiverId,
         message,
@@ -28,4 +27,10 @@ const getChats = asyncHandler(async (req, res) => {
         .catch((err) => res.status(500).json({error: err.message}));
 })
 
-export {createChat, getChats};
+const getChatById = asyncHandler(async (req, res) => {
+    Chat.findById(req.params.id)
+        .then((chat) => res.status(200).json(chat))
+        .catch((err) => res.status(500).json({error: err.message}));
+})
+
+export {createChat, getChats, getChatById};

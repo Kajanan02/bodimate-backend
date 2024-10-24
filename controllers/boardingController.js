@@ -58,7 +58,7 @@ const createBoarding = asyncHandler(async (req, res) => {
 });
 const getOneBoarding = asyncHandler(async (req, res) => {
     let _id = req.params.id
-    const boarding = await Boarding.findById(_id)
+    const boarding = await Boarding.findById(_id).populate('boardingOwner');
     if (boarding) {
         res.json(boarding)
     }
