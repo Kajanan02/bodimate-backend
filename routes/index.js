@@ -7,6 +7,7 @@ import bookingRoutes from "./bookingRoutes.js";
 import paymentRoutes from "./paymentRoutes.js";
 import adminRoutes from "./adminRoutes.js";
 import universityRoutes from "./universityRoutes.js";
+import favouriteBoardingRoutes from "./favouriteBoardingRoutes.js";
 
 const router = express.Router();
 
@@ -22,5 +23,5 @@ router.use("/api/booking", bookingRoutes);
 router.use("/api/payment", paymentRoutes);
 router.use("/api/admin", adminRoutes);
 router.use("/api/university", universityRoutes);
-router.use("/api/favourite", universityRoutes);
+router.use("/api/favourite", favouriteBoardingRoutes);
 export default router;

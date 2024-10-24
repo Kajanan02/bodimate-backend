@@ -754,6 +754,27 @@
         }
       }
     },
+    "/api/chat/messages/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/booking/createBooking": {
       "post": {
         "description": "",
@@ -1112,7 +1133,7 @@
         }
       }
     },
-    "/api/favourite/createUniversity": {
+    "/api/favourite/createFavourite": {
       "post": {
         "description": "",
         "parameters": [
@@ -1122,16 +1143,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "universityName": {
+                "studentId": {
                   "example": "any"
                 },
-                "district": {
-                  "example": "any"
-                },
-                "universityImg": {
-                  "example": "any"
-                },
-                "location": {
+                "boardingId": {
                   "example": "any"
                 }
               }
@@ -1148,141 +1163,17 @@
         }
       }
     },
-    "/api/favourite/getAllUniversity": {
+    "/api/favourite/getAllFavourite": {
       "get": {
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": ""
           }
         }
       }
     },
-    "/api/favourite/getOneUniversity/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "universityName": {
-                  "example": "any"
-                },
-                "district": {
-                  "example": "any"
-                },
-                "location": {
-                  "example": "any"
-                },
-                "universityImg": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/api/favourite/getOneUniversity/{universityName}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "universityName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/api/favourite/editUniversity/{id}": {
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "universityName": {
-                  "example": "any"
-                },
-                "district": {
-                  "example": "any"
-                },
-                "location": {
-                  "example": "any"
-                },
-                "universityImg": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/api/favourite/deleteUniversity/{id}": {
+    "/api/favourite/deleteFavourite/{id}": {
       "delete": {
         "description": "",
         "parameters": [
