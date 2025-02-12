@@ -108,6 +108,20 @@ const editBoarding = asyncHandler(async (req, res) => {
     }
 })
 
+const verifyBoarding = asyncHandler(async (req, res) => {
+    let _id = req.params.id
+    let value = req.params.value
+    const boarding = await Boarding.findById(_id);
+    if (boarding) {
+        boarding.isVerified = value;
+        const updatedBoarding = await boarding.save();
+        res.json(updatedBoarding);
+    } else {
+        res.status(404).json({status: "FAILED", message: "Boarding not found"});
+
+    }
+})
+
 const deleteBoarding = asyncHandler(async (req, res) => {
     const boarding = await Boarding.findById(req.params.id);
     if (boarding) {
@@ -118,4 +132,4 @@ const deleteBoarding = asyncHandler(async (req, res) => {
     }
 })
 
-export {createBoarding, getAllBoarding, editBoarding, deleteBoarding, getOneBoarding};
+export {createBoarding, getAllBoarding, editBoarding, deleteBoarding, getOneBoarding,verifyBoarding};
